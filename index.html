@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Central de Controle ADI</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2064%2064%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237B8BF2%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%234458E0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2217%22%20fill%3D%22url%28%23g%29%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%20opacity%3D%22.35%22/%3E%3Crect%20x%3D%2228%22%20y%3D%2214%22%20width%3D%228%22%20height%3D%2236%22%20rx%3D%224%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%2217%22%20y%3D%2224%22%20width%3D%2230%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22%23fff%22/%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2246%22%20r%3D%224.5%22%20fill%3D%22%23fff%22%20opacity%3D%22.9%22/%3E%3C/svg%3E">
+<style>
+:root{--bg:#F5F7FB;--card:#fff;--ink:#1c2434;--mut:#6b7587;--line:#E6EAF2;--ac:#5468E7;--acs:#EEF0FD;--r:16px}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+header{position:sticky;top:0;z-index:5;background:rgba(245,247,251,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{max-width:880px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em;margin-right:auto}
+.brand svg{width:36px;height:36px}
+#q{width:220px;max-width:100%;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.b{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;transition:background .15s,border-color .15s}
+.b:hover{border-color:var(--ac);background:var(--acs)}
+.b.p{background:var(--ac);border-color:var(--ac);color:#fff}
+.b.p:hover{background:#4256d6}
+.b.d{color:#c0392b}
+.ib{border:0;background:transparent;border-radius:10px;width:34px;height:34px;display:inline-grid;place-items:center;color:var(--mut)}
+.ib:hover{background:var(--acs);color:var(--ac)}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main{max-width:880px;margin:0 auto;padding:22px 20px 80px}
+section{margin-bottom:34px}
+.sh{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.st{flex:1;min-width:0;border:0;background:transparent;font-size:19px;font-weight:700;letter-spacing:-.01em;padding:6px 8px;border-radius:8px}
+.st:hover,.st:focus{background:#fff}
+.n{color:var(--mut);font-size:13px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;transition:border-color .15s}
+.it:hover{border-color:#cdd5ea}
+.row{display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px}
+.ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c,#5468E7) 12%,#fff);color:var(--c,#5468E7)}
+.ic svg{width:21px;height:21px}
+.ic svg.br{fill:currentColor;stroke:none}
+.tx{flex:1;min-width:0}
+.tx b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tx small{display:block;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ac{display:flex;align-items:center;gap:2px;flex:none}
+.cp{margin-left:6px}
+.chev{transition:transform .2s}
+.chev.o{transform:rotate(180deg)}
+.vs{border-top:1px solid var(--line);padding:6px 14px 12px}
+.v{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.v:last-child{border:0}
+.vt{flex:1;white-space:pre-wrap;word-break:break-word;user-select:text;font-size:14px;line-height:1.55}
+.vb{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none}
+.vb div{display:flex}
+.tag{font-size:12px;color:var(--ac);background:var(--acs);border-radius:999px;padding:1px 9px;margin-bottom:2px}
+.up{transform:rotate(180deg)}
+.empty{text-align:center;color:var(--mut);padding:50px 0}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:9px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.2s}
+#toast.s{opacity:1;transform:translate(-50%,0)}
+dialog{border:0;border-radius:20px;padding:0;width:min(560px,94vw);box-shadow:0 20px 60px rgba(28,36,52,.25);color:var(--ink)}
+dialog::backdrop{background:rgba(28,36,52,.35)}
+.dl{padding:22px;display:grid;gap:14px;max-height:88vh;overflow:auto}
+.dl h2{margin:0;font-size:18px}
+label{display:grid;gap:5px;font-size:13px;color:var(--mut);font-weight:600}
+label input,label select,label textarea{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-weight:400;color:var(--ink);background:#fff;width:100%}
+textarea{min-height:110px;resize:vertical;line-height:1.5}
+.vr{display:grid;gap:6px}
+.vr .l{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mut);font-weight:600}
+.da{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.da .b.d{margin-right:auto}
+@media(max-width:560px){.tx small{display:none}.it .ac .ib.hide{display:none}#q{width:100%;order:3}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="hd">
+<div class="brand"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B8BF2"/><stop offset="1" stop-color="#4458E0"/></linearGradient></defs><rect width="64" height="64" rx="17" fill="url(#g)"/><circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-width="2" opacity=".35"/><rect x="28" y="14" width="8" height="36" rx="4" fill="#fff"/><rect x="17" y="24" width="30" height="8" rx="4" fill="#fff"/><circle cx="46" cy="46" r="4.5" fill="#fff" opacity=".9"/></svg><span>Central de Controle ADI</span></div>
+<input id="q" type="search" placeholder="Buscar" aria-label="Buscar">
+<button class="b" data-act="exp" title="Salvar uma cópia dos dados">Exportar</button>
+<button class="b" data-act="imp" title="Carregar dados salvos">Importar</button>
+<button class="b p" data-act="nsec"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Seção</button>
+<input id="file" type="file" accept="application/json" hidden>
+</div></header>
+<main id="app"></main>
+<div id="toast" role="status"></div>
+<dialog id="dlg"><div class="dl" id="dlb"></div></dialog>
+<script>
+const K='central_controle_adi_v1';
+const BR={ig:{c:'#E4405F',p:'M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077'},fb:{c:'#1877F2',p:'M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z'},yt:{c:'#FF0000',p:'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'},sp:{c:'#1ED760',p:'M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z'}};
+const P={chev:'M6 9l6 6 6-6',edit:'M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z',copy:'M9 9h11a2 2 0 012 2v9a2 2 0 01-2 2H9a2 2 0 01-2-2v-9a2 2 0 012-2zM5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1',ext:'M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6',trash:'M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6',link:'M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1',doc:'M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h8',text:'M4 7V4h16v3M9 20h6M12 4v16'};
+const ico=(n,x='')=>`<svg class="i ${x}" viewBox="0 0 24 24"><path d="${P[n]}"/></svg>`;
+const uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=s=>document.querySelector(s);
+const L=(title,url)=>({id:uid(),type:'link',title,url});
+const T=(type,title,...v)=>({id:uid(),type,title,variants:v});
+const SEED=[
+{id:uid(),title:'Redes sociais',items:[
+L('Instagram','https://www.instagram.com/adimacatuba/'),
+L('Facebook','https://www.facebook.com/profile.php?id=100060522023158&locale=pt_BR'),
+L('Facebook (endereço usado nos textos)','https://www.facebook.com/ipirangamacatuba/'),
+L('YouTube','https://www.youtube.com/@ADIMacatuba'),
+L('YouTube – link de inscrição no canal','https://www.youtube.com/channel/UCn-DVtFN0xgEcBkzVImfNVg?sub_confirmation=1'),
+L('Spotify – ADI Macatuba (pregações)','https://open.spotify.com/show/5oQiUexa5AGUMpDiXpmmYz'),
+L('Spotify – Herdeiros Podcast','https://open.spotify.com/show/3dfOTITH88gQEXn17L6Dk3')]},
+{id:uid(),title:'Playlists do YouTube',items:[
+L('Cultos & Pregações','https://www.youtube.com/watch?v=52GGsnikJvo&list=PLhKv0IdF4iK32c-s4tocux4WCA8I0O4Di'),
+L('Estudos Bíblicos','https://www.youtube.com/watch?v=8L3CiIHszLo&list=PLhKv0IdF4iK31-R6U0qIvVcJX31bm9dQa'),
+L('Hinos & Louvores','https://www.youtube.com/watch?v=JBIxYOPTPi0&list=PLhKv0IdF4iK3LeZGoUnT8h6dXQ2VkTq5o')]},
+{id:uid(),title:'Sites e sistemas da igreja',items:[
+L('Site da ADI Macatuba','https://adimacatuba.github.io/ADI-MACATUBA/'),
+L('Agenda e escalas','https://adimacatuba.github.io/agenda-escalas/'),
+L('Relatório da EBD','https://adimacatuba.github.io/CONTROLE-EBD/'),
+L('Palco na Mão','https://adimacatuba.github.io/PALCO-NA-MAO/')]},
+{id:uid(),title:'Descrições de vídeos',items:[
+T('descricao','Descrição dos vídeos do YouTube',
+`Estamos localizados na R. José Cruzerá, 11120, Jd. Planalto, na cidade de Macatuba/SP, venha nos fazer uma visita!
+
+Se inscreva em nosso canal e ative as notificações para não perder nossos vídeos:
+
+https://www.youtube.com/channel/UCn-DVtFN0xgEcBkzVImfNVg?sub_confirmation=1
+
+
+Fique por dentro de todos os eventos, cultos e atividades da nossa igreja:
+
+- https://www.instagram.com/adimacatuba/
+
+- https://open.spotify.com/show/5oQiUexa5AGUMpDiXpmmYz?si=a1e03ad330d84675
+
+- https://www.facebook.com/ipirangamacatuba/`,
+`📍 Venha nos visitar! R. José Cruzerá, 11120, Jd. Planalto, Macatuba/SP.
+
+🔔 Inscreva-se no canal e ative o sininho para não perder nenhum vídeo:
+https://www.youtube.com/channel/UCn-DVtFN0xgEcBkzVImfNVg?sub_confirmation=1
+
+Acompanhe os eventos, cultos e atividades da nossa igreja:
+📸 Instagram: https://www.instagram.com/adimacatuba/
+🎧 Spotify: https://open.spotify.com/show/5oQiUexa5AGUMpDiXpmmYz?si=a1e03ad330d84675
+👍 Facebook: https://www.facebook.com/ipirangamacatuba/`),
+T('descricao','Descrição dos vídeos do Spotify',
+`Estamos localizados na R. José Cruzerá, 11120, Jd. Planalto, na cidade de Macatuba/SP, venha nos fazer uma visita!
+Mais informações em nosso site: https://adimacatuba.github.io/ADI-MACATUBA/`,
+`Nossa igreja fica na R. José Cruzerá, 11120, Jd. Planalto, em Macatuba/SP. Venha nos fazer uma visita! 🙏
+
+Saiba mais em nosso site: https://adimacatuba.github.io/ADI-MACATUBA/`)]},
+{id:uid(),title:'Mensagens e chamadas',items:[
+T('texto','Mensagem padrão – comentários da live',
+`A paz do Senhor, nos acompanhe através de nossas redes sociais:
+
+@ADIMacatuba - https://www.instagram.com/adimacatuba/
+
+@ADIMacatuba https://www.facebook.com/ipirangamacatuba/
+
+🙌🏻🙌🏻🙌🏻`,
+`Paz do Senhor! 🙏 Que bom ter você com a gente! Continue conosco nas redes sociais:
+
+📸 Instagram: https://www.instagram.com/adimacatuba/
+👍 Facebook: https://www.facebook.com/ipirangamacatuba/
+
+Deus abençoe! 🙌🏻`),
+T('texto','Chamada Spotify',
+`Nos siga no Spotify!
+
+Mensagens direto do pulpito da nossa igreja. Toda semana um novo episódio com pregações que edificam, ensinam e transformam vidas através da Palavra de Deus:
+
+https://open.spotify.com/show/5oQiUexa5AGUMpDiXpmmYz?si=ilXOAQokQ4SA1BkTpwAYQw`,
+`🎧 Ouça no Spotify!
+
+Pregações direto do púlpito da ADI Macatuba, com um novo episódio toda semana. Mensagens que edificam, ensinam e transformam vidas pela Palavra de Deus.
+
+https://open.spotify.com/show/5oQiUexa5AGUMpDiXpmmYz?si=ilXOAQokQ4SA1BkTpwAYQw`),
+T('texto','Chamada com endereço da igreja',
+`Estamos localizados na R. José Cruzerá, 11120, Jd. Planalto, na cidade de Macatuba/SP, venha nos fazer uma visita!
+Mais informações em nosso site: https://adimacatuba.github.io/ADI-MACATUBA/`,
+`📍 Venha nos visitar!
+R. José Cruzerá, 11120, Jd. Planalto – Macatuba/SP.
+
+Conheça mais sobre a igreja: https://adimacatuba.github.io/ADI-MACATUBA/`)]}
+];
+let D,open=new Set(),q='',ed=null;
+function load(){try{const s=JSON.parse(localStorage.getItem(K));if(Array.isArray(s))return s}catch(e){}return SEED}
+function save(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+D=load();
+function brand(u){const m=[['instagram.com','ig'],['facebook.com','fb'],['youtube.com','yt'],['youtu.be','yt'],['spotify.com','sp']].find(x=>u.includes(x[0]));return m&&BR[m[1]]}
+function icon(it){
+ if(it.type==='link'){const b=brand(it.url||'');return b?`<div class="ic" style="--c:${b.c}"><svg class="br" viewBox="0 0 24 24"><path d="${b.p}"/></svg></div>`:`<div class="ic">${ico('link')}</div>`}
+ return `<div class="ic">${ico(it.type==='texto'?'text':'doc')}</div>`}
+const prev=it=>it.type==='link'?it.url:(it.variants[0]||'').replace(/\s+/g,' ');
+function item(s,it){
+ const isL=it.type==='link',o=open.has(it.id),nv=(it.variants||[]).length;
+ let h=`<div class="it" data-s="${s.id}" data-i="${it.id}"><div class="row">${icon(it)}<div class="tx"><b>${esc(it.title)}</b><small>${esc(prev(it))}${!isL&&nv>1?' · '+nv+' variações':''}</small></div><div class="ac">`;
+ if(!isL)h+=`<button class="ib" data-act="tog" title="Ver variações">${ico('chev','chev '+(o?'o':''))}</button>`;
+ if(isL)h+=`<button class="ib" data-act="go" title="Abrir link">${ico('ext')}</button>`;
+ h+=`<button class="ib" data-act="edit" title="Editar">${ico('edit')}</button><button class="b p cp" data-act="cp">${ico('copy')}Copiar</button></div></div>`;
+ if(!isL&&o)h+=`<div class="vs">`+it.variants.map((v,k)=>`<div class="v" data-v="${k}"><div class="vt">${esc(v)}</div><div class="vb">${k?'':'<span class="tag">Principal</span>'}<div>${k?`<button class="ib" data-act="up" title="Subir">${ico('chev','up')}</button>`:''}${k<nv-1?`<button class="ib" data-act="dn" title="Descer">${ico('chev')}</button>`:''}<button class="ib" data-act="cpv" title="Copiar esta variação">${ico('copy')}</button></div></div></div>`).join('')+`</div>`;
+ return h+'</div>'}
+function render(){
+ const f=q.trim().toLowerCase();
+ const m=it=>!f||(it.title+' '+(it.url||'')+' '+(it.variants||[]).join(' ')).toLowerCase().includes(f);
+ const h=D.map((s,n)=>{const its=s.items.filter(m);if(f&&!its.length)return'';
+  return `<section data-s="${s.id}"><div class="sh"><input class="st" value="${esc(s.title)}" data-act="stitle" aria-label="Nome da seção"><span class="n">${s.items.length}</span><button class="b" data-act="add">${ico('chev','').replace('M6 9l6 6 6-6','M12 5v14M5 12h14')}Adicionar</button>${n?`<button class="ib" data-act="sup" title="Mover seção para cima">${ico('chev','up')}</button>`:''}${n<D.length-1?`<button class="ib" data-act="sdn" title="Mover seção para baixo">${ico('chev')}</button>`:''}<button class="ib" data-act="dsec" title="Excluir seção">${ico('trash')}</button></div>${its.map(i=>item(s,i)).join('')||'<div class="empty">Nenhum item ainda.</div>'}</section>`}).join('');
+ $('#app').innerHTML=h||'<div class="empty">Nada encontrado. Use “Seção” para criar uma nova seção.</div>'}
+async function cp(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('Copiado!')}
+let tt;function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('s');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('s'),1400)}
+const find=(sid,iid)=>{const s=D.find(x=>x.id===sid);return[s,s&&s.items.find(i=>i.id===iid)]};
+function drawV(){const w=$('#fv');w.innerHTML=ed.item.variants.map((v,k)=>`<div class="vr"><div class="l"><span>${k?'Variação '+(k+1):'Texto principal'}</span>${ed.item.variants.length>1?`<button class="ib" data-d="rv" data-k="${k}" title="Remover">${ico('trash')}</button>`:''}</div><textarea class="fvv">${esc(v)}</textarea></div>`).join('')+`<button class="b" data-d="av" type="button">Adicionar variação</button>`}
+function readV(){ed.item.variants=[...document.querySelectorAll('.fvv')].map(t=>t.value)}
+function kindUI(){const l=$('#ft').value==='link';$('#fu').hidden=!l;$('#fv').hidden=l;if(!l&&!(ed.item.variants||[]).length){ed.item.variants=[''];}if(!l)drawV()}
+function openEd(sid,iid){
+ const [s,it]=find(sid,iid);
+ ed={sid,isNew:!it,item:it?JSON.parse(JSON.stringify(it)):{id:uid(),type:'link',title:'',url:'',variants:['']}};
+ $('#dlb').innerHTML=`<h2>${ed.isNew?'Novo item':'Editar item'}</h2><label>Tipo<select id="ft"><option value="link">Link</option><option value="descricao">Descrição</option><option value="texto">Texto</option></select></label><label>Título<input id="fti" value="${esc(ed.item.title)}"></label><label id="fu">Link<input id="fur" type="url" placeholder="https://" value="${esc(ed.item.url||'')}"></label><div id="fv" style="display:grid;gap:14px"></div><div class="da">${ed.isNew?'':'<button class="b d" data-d="del">Excluir</button>'}<button class="b" data-d="x">Cancelar</button><button class="b p" data-d="ok">Salvar</button></div>`;
+ $('#ft').value=ed.item.type;kindUI();$('#dlg').showModal();$('#fti').focus()}
+function saveEd(){
+ const t=$('#fti').value.trim(),type=$('#ft').value,it=ed.item;
+ if(!t){$('#fti').focus();return}
+ it.title=t;it.type=type;
+ if(type==='link'){let u=$('#fur').value.trim();if(!u){$('#fur').focus();return}if(!/^[a-z]+:/i.test(u))u='https://'+u;it.url=u;delete it.variants}
+ else{readV();it.variants=it.variants.filter(v=>v.trim());if(!it.variants.length){document.querySelector('.fvv').focus();return}delete it.url}
+ const s=D.find(x=>x.id===ed.sid),k=s.items.findIndex(i=>i.id===it.id);
+ k<0?s.items.push(it):s.items[k]=it;
+ save();render();$('#dlg').close()}
+document.addEventListener('click',e=>{
+ const d=e.target.closest('[data-d]');
+ if(d){const a=d.dataset.d;
+  if(a==='x')$('#dlg').close();
+  else if(a==='ok')saveEd();
+  else if(a==='av'){readV();ed.item.variants.push('');drawV();[...document.querySelectorAll('.fvv')].pop().focus()}
+  else if(a==='rv'){readV();ed.item.variants.splice(+d.dataset.k,1);drawV()}
+  else if(a==='del'&&confirm('Excluir este item?')){const s=D.find(x=>x.id===ed.sid);s.items=s.items.filter(i=>i.id!==ed.item.id);save();render();$('#dlg').close()}
+  return}
+ const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;
+ const a=b.dataset.act,sid=b.closest('[data-s]')?.dataset.s,iid=b.closest('[data-i]')?.dataset.i,vk=+b.closest('[data-v]')?.dataset.v;
+ const [s,it]=find(sid,iid);
+ if(a==='cp')cp(it.type==='link'?it.url:it.variants[0]);
+ else if(a==='cpv')cp(it.variants[vk]);
+ else if(a==='go')window.open(it.url,'_blank','noopener');
+ else if(a==='tog'){open.has(iid)?open.delete(iid):open.add(iid);render()}
+ else if(a==='edit')openEd(sid,iid);
+ else if(a==='add')openEd(sid,null);
+ else if(a==='up'||a==='dn'){const j=a==='up'?vk-1:vk+1,v=it.variants;[v[vk],v[j]]=[v[j],v[vk]];save();render()}
+ else if(a==='sup'||a==='sdn'){const n=D.findIndex(x=>x.id===sid),j=a==='sup'?n-1:n+1;if(j>=0&&j<D.length){[D[n],D[j]]=[D[j],D[n]];save();render();document.querySelector(`section[data-s="${sid}"]`)?.scrollIntoView({block:'nearest',behavior:'smooth'})}}
+ else if(a==='dsec'){if(confirm('Excluir a seção “'+s.title+'” e todos os itens dela?')){D=D.filter(x=>x.id!==sid);save();render()}}
+ else if(a==='nsec'){D.push({id:uid(),title:'Nova seção',items:[]});save();render();const i=[...document.querySelectorAll('.st')].pop();i.focus();i.select();i.scrollIntoView({block:'center'})}
+ else if(a==='exp'){const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,1)],{type:'application/json'}));l.download='central-controle-adi.json';l.click()}
+ else if(a==='imp')$('#file').click()});
+document.addEventListener('change',e=>{
+ if(e.target.id==='ft'){if($('#ft').value!=='link'&&!ed.item.variants?.length)ed.item.variants=[''];kindUI()}
+ else if(e.target.dataset.act==='stitle'){const s=D.find(x=>x.id===e.target.closest('[data-s]').dataset.s);s.title=e.target.value.trim()||'Sem título';save()}
+ else if(e.target.id==='file'){const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!Array.isArray(j))throw 0;if(confirm('Substituir os dados atuais pelos do arquivo?')){D=j;save();render();toast('Importado!')}}catch(x){alert('Arquivo inválido.')}};r.readAsText(e.target.files[0]);e.target.value=''}});
+$('#q').addEventListener('input',e=>{q=e.target.value;render()});
+render();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
